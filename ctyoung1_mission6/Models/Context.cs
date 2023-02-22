@@ -25,7 +25,7 @@ namespace ctyoung1_mission6.Models
                     Title = "Troy",
                     Year = 1990,
                     Director = "Steven Spielburg",
-                    Rating = "PG",
+                    RatingID = 1,
                     Edited = false,
                     Lent = "", 
                     Notes = ""
@@ -38,7 +38,7 @@ namespace ctyoung1_mission6.Models
                     Title = "I am Legend",
                     Year = 2005,
                     Director = "Michael Bay",
-                    Rating = "PG-13",
+                    RatingID = 2,
                     Edited = true,
                     Lent = "Bob",
                     Notes = ""
@@ -51,7 +51,7 @@ namespace ctyoung1_mission6.Models
                     Title = "Jumanji",
                     Year = 2015,
                     Director = "Jessie Pinkman",
-                    Rating = "R",
+                    RatingID = 3,
                     Edited = false,
                     Lent = "",
                     Notes = ""

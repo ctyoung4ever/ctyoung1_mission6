@@ -8,7 +8,7 @@ using ctyoung1_mission6.Models;
 namespace ctyoung1_mission6.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230214003913_Initial")]
+    [Migration("20230222030802_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,9 +40,8 @@ namespace ctyoung1_mission6.Migrations
                     b.Property<string>("Notes")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Rating")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("RatingID")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -52,6 +51,8 @@ namespace ctyoung1_mission6.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("movieId");
+
+                    b.HasIndex("RatingID");
 
                     b.ToTable("responses");
 
@@ -64,7 +65,7 @@ namespace ctyoung1_mission6.Migrations
                             Edited = false,
                             Lent = "",
                             Notes = "",
-                            Rating = "PG",
+                            RatingID = 1,
                             Title = "Troy",
                             Year = 1990
                         },
@@ -76,7 +77,7 @@ namespace ctyoung1_mission6.Migrations
                             Edited = true,
                             Lent = "Bob",
                             Notes = "",
-                            Rating = "PG-13",
+                            RatingID = 2,
                             Title = "I am Legend",
                             Year = 2005
                         },
@@ -88,10 +89,33 @@ namespace ctyoung1_mission6.Migrations
                             Edited = false,
                             Lent = "",
                             Notes = "",
-                            Rating = "R",
+                            RatingID = 3,
                             Title = "Jumanji",
                             Year = 2015
                         });
+                });
+
+            modelBuilder.Entity("ctyoung1_mission6.Models.Rating", b =>
+                {
+                    b.Property<int>("RatingID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("rating")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("RatingID");
+
+                    b.ToTable("Rating");
+                });
+
+            modelBuilder.Entity("ctyoung1_mission6.Models.ApplicationResponse", b =>
+                {
+                    b.HasOne("ctyoung1_mission6.Models.Rating", "Rating")
+                        .WithMany()
+                        .HasForeignKey("RatingID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
