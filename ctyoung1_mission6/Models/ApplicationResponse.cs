@@ -25,14 +25,17 @@ namespace ctyoung1_mission6.Models
 
         [Required]
 
-        public string Rating { get; set; }
+        
         
         public bool Edited { get; set; }
         
         public string Lent { get; set; }
         
         public string Notes { get; set; }
-  
+
+        public int RatingID { get; set; }
+        public Rating Rating { get; set; }
+
 
 
     }

@@ -11,11 +11,11 @@ namespace ctyoung1_mission6.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+       
         private Context _blahContext { get; set; } 
-        public HomeController(ILogger<HomeController> logger,Context x)
+        public HomeController(Context x)
         {
-            _logger = logger;
+           
             _blahContext = x; 
         }
 
@@ -40,10 +40,12 @@ namespace ctyoung1_mission6.Controllers
             _blahContext.SaveChanges();
             return View("Conformation", ar);
         }
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        
+
+        public IActionResult Display()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var returnlist = _blahContext.responses.ToList();
+            return View(returnlist);
         }
     }
 }

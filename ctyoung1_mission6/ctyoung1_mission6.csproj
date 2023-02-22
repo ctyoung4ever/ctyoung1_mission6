@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>mdavies9_mission6</RootNamespace>
+    <RootNamespace>ctyoung1_mission6</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
