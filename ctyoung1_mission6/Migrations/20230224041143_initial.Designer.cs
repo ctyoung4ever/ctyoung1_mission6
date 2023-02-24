@@ -8,7 +8,7 @@ using ctyoung1_mission6.Models;
 namespace ctyoung1_mission6.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230223021313_initial")]
+    [Migration("20230224041143_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,9 +23,8 @@ namespace ctyoung1_mission6.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -38,10 +37,12 @@ namespace ctyoung1_mission6.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Notes")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(25);
 
-                    b.Property<int>("RatingID")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Rating")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -52,68 +53,85 @@ namespace ctyoung1_mission6.Migrations
 
                     b.HasKey("movieId");
 
-                    b.HasIndex("RatingID");
+                    b.HasIndex("CategoryId");
 
-                    b.ToTable("responses");
+                    b.ToTable("Responses");
 
                     b.HasData(
                         new
                         {
                             movieId = 1,
-                            Category = "Action",
+                            CategoryId = 1,
                             Director = "Steven Spielburg",
                             Edited = false,
                             Lent = "",
                             Notes = "",
-                            RatingID = 1,
+                            Rating = "PG",
                             Title = "Troy",
                             Year = 1990
                         },
                         new
                         {
                             movieId = 2,
-                            Category = "Comedy",
+                            CategoryId = 2,
                             Director = "Michael Bay",
                             Edited = true,
                             Lent = "Bob",
                             Notes = "",
-                            RatingID = 2,
+                            Rating = "PG-13",
                             Title = "I am Legend",
                             Year = 2005
                         },
                         new
                         {
                             movieId = 3,
-                            Category = "Adventure",
+                            CategoryId = 3,
                             Director = "Jessie Pinkman",
                             Edited = false,
                             Lent = "",
                             Notes = "",
-                            RatingID = 3,
+                            Rating = "R",
                             Title = "Jumanji",
                             Year = 2015
                         });
                 });
 
-            modelBuilder.Entity("ctyoung1_mission6.Models.Rating", b =>
+            modelBuilder.Entity("ctyoung1_mission6.Models.Category", b =>
                 {
-                    b.Property<int>("RatingID")
+                    b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("rating")
+                    b.Property<string>("CategoryName")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("RatingID");
+                    b.HasKey("CategoryId");
 
-                    b.ToTable("Rating");
+                    b.ToTable("Categorys");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Action"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Adventure"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Drama"
+                        });
                 });
 
             modelBuilder.Entity("ctyoung1_mission6.Models.ApplicationResponse", b =>
                 {
-                    b.HasOne("ctyoung1_mission6.Models.Rating", "Rating")
+                    b.HasOne("ctyoung1_mission6.Models.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("RatingID")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

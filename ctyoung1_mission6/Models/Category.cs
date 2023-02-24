@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace ctyoung1_mission6.Models
 {
-    public class Rating
+    public class Category
     {
         [Key]
         [Required]
-        public int RatingID { get; set; }
-        public string rating { get; set; }
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
     }
 }
+

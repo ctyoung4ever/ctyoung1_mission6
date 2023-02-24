@@ -7,8 +7,21 @@
 </div>
 <div>
     <form method="post">
-        <label asp-for="Category">Category</label>
-        <input asp-for="Category" />
+     
+        <input asp-for="movieId" type ="hidden"/>
+
+        <label asp-for="CategoryId">Category </label>
+        <select asp-for="CategoryId">
+            <option>Select a Category</option>
+            @foreach (Category c in ViewBag.Categorys)
+            {
+                <option value="@c.CategoryId">@c.CategoryName</option>
+            }
+
+
+
+        </select>
+
         <br />
         <label asp-for="Title">Title</label>
         <input asp-for="Title" />
@@ -19,8 +32,8 @@
         <label asp-for="Director">Director</label>
         <input asp-for="Director" />
         <br />
-        <label asp-for="RatingID">Rating</label>
-        <select asp-for="RatingID">
+        <label asp-for="Rating">Rating</label>
+        <select asp-for="Rating">
             <option value="G">G</option>
             <option value="PG">PG</option>
             <option value="PG13">PG-13</option>
